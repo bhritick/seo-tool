@@ -11,9 +11,32 @@
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
     <style>
+        .bg-header {
+            background-image: url(./res/heqader-pic.jpg);
+            background-size: contain;
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+
         .bg-header-next {
             background: rgb(255, 255, 255);
             background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 60%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .glass-bg {
+            background: linear-gradient(225deg,
+                    rgba(255, 255, 255, 0.5) 26%,
+                    rgba(0, 0, 0, 0.1) 74%);
+            /* background-blend-mode: ; */
+            /* box-shadow:
+                inset 0px 5px 5px 0px rgba(255, 255, 255, 0.1),
+                inset 0px -5px 5px 0px rgba(0, 0, 0, 0.1); */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .text-shadow {
+            text-shadow: 3px 3px 9px #ffffff;
         }
     </style>
 
@@ -21,29 +44,32 @@
 </head>
 
 <body>
-    <header class="bg-warning">
-        <div class="bg-header-next">
-            <div class="container py-5">
-                <div class="row">
-                    <div class="col-md-6 col-12">
-                        <div class="card border-0 my-5">
-                            <div class="card-body">
-                                <h1 class="lead text-center fw-bold display-3 my-5">SEO TOOL</h1>
-                            </div>
+    <header class="bg-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 my-5 py-5"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="card shadow-sm glass-bg w-100 border-0 mt-5">
+                        <div class="card-body">
+                            <h1 class="lead text-center text-shadow fw-bold display-3 my-5 pb-1">SEO TOOL</h1>
                         </div>
                     </div>
-                    <div class="col-md-6 col-12">
-                        <div class="card border-0 my-5">
-                            <div class="card-body px-5">
-                                <div class="mb-3">
-                                    <label class="lead form-label fw-bold my-3">Email address</label>
-                                    <input type="url" class="form-control shadow-none mb-4" id="target-url"
-                                        value="https://anupammondal.in" placeholder="https://niveshguru.com">
-                                </div>
-                                <div class="text-end mb-3">
-                                    <button type="button" class="btn btn-primary shadow-none px-3"
-                                        onclick="getH1();">Submit</button>
-                                </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="card shadow-sm glass-bg w-100 border-0 mt-5">
+                        <div class="card-body px-5">
+                            <div class="mb-3">
+                                <label class="lead text-shadow form-label fw-bold my-3">Email address</label>
+                                <input type="url" class="form-control text-primary rounded-pill shadow-none mb-4 ps-4" id="target-url"
+                                    value="https://anupammondal.in" placeholder="https://niveshguru.com">
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-light rounded-pill shadow-none px-5"
+                                    onclick="getH1();">Submit</button>
                             </div>
                         </div>
                     </div>
@@ -57,7 +83,7 @@
                 <!-- <div class="col-md-2 col-12"></div> -->
                 <!-- <div class="col-md-8 col-12"></div> -->
                 <div class="col-12">
-                    <table class="table">
+                    <table class="table mt-5">
                         <thead>
                             <tr>
                                 <th scope="col">#</th>

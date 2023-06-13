@@ -70,9 +70,23 @@ function getH1() {
             document.getElementById("pCount").innerHTML = pcount;
             document.getElementById("p-characters").innerHTML = pCharVal;
 
+            // for img Tag
+            const imgTags = htmlDoc.getElementsByTagName('img');
+            let imgcount = 0;
+            let imgCharVal = 0;
+            let imgText = "";
+            for (let i = 0; i < imgTags.length; i++) {
+                imgText = imgText + "<li>" + imgTags[i].textContent + "</li>";
+                imgCharVal = imgCharVal + imgText.length;
+                imgcount = imgcount + 1;
+            }
+            // document.getElementById("img-content").innerHTML = imgText;
+            document.getElementById("imgCount").innerHTML = imgcount;
+            document.getElementById("img-characters").innerHTML = imgCharVal;
+
             // for IMG Tag
 
-            let imgTags = htmlDoc.getElementsByTagName('img').attributes;
+            // let imgTags = htmlDoc.getElementsByTagName('img').attributes;
             // let imgText = "";
             // const imgCharVal = imgText.length;
             // for (let i = 0; i < imgTags.length; i++) {
@@ -80,7 +94,7 @@ function getH1() {
             // }
             // document.getElementById("img-content").innerHTML = imgText;
             // document.getElementById("img-characters").innerHTML = imgTags;
-            document.getElementById("img-characters").innerHTML = imgTags;
+            // document.getElementById("img-characters").innerHTML = imgTags;
         });
     // console.log(urifetch);
 }

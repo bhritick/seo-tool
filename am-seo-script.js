@@ -7,12 +7,54 @@ function getH1() {
             const parser = new DOMParser();
             const htmlDoc = parser.parseFromString(html, 'text/html');
 
-            // for H1 Tag
+            // for h1 Tag
+            // const h1Tags = htmlDoc.getElementsByTagName('h1');
+            // const h1Text = h1Tags[0].textContent;
+            // const h1CharVal = h1Text.length;
+            // document.getElementById("h1-content").innerHTML = h1Text;
+            // document.getElementById("h1-characters").innerHTML = h1CharVal;
+
+            // for h1 Tag
             const h1Tags = htmlDoc.getElementsByTagName('h1');
-            const h1Text = h1Tags[0].textContent;
-            const h1CharVal = h1Text.length;
+            let h1count = 0;
+            let h1CharVal = 0;
+            let h1Text = "";
+            for (let i = 0; i < h1Tags.length; i++) {
+                h1Text = h1Text + "<li>" + h1Tags[i].textContent + "</li>";
+                h1CharVal = h1CharVal + h1Text.length;
+                h1count = h1count + 1;
+            }
             document.getElementById("h1-content").innerHTML = h1Text;
+            document.getElementById("h1Count").innerHTML = h1count;
             document.getElementById("h1-characters").innerHTML = h1CharVal;
+
+            // for h2 Tag
+            const h2Tags = htmlDoc.getElementsByTagName('h2');
+            let h2count = 0;
+            let h2CharVal = 0;
+            let h2Text = "";
+            for (let i = 0; i < h2Tags.length; i++) {
+                h2Text = h2Text + "<li>" + h2Tags[i].textContent + "</li>";
+                h2CharVal = h2CharVal + h2Text.length;
+                h2count = h2count + 1;
+            }
+            document.getElementById("h2-content").innerHTML = h2Text;
+            document.getElementById("h2Count").innerHTML = h2count;
+            document.getElementById("h2-characters").innerHTML = h2CharVal;
+
+            // for h3 Tag
+            const h3Tags = htmlDoc.getElementsByTagName('h3');
+            let h3count = 0;
+            let h3CharVal = 0;
+            let h3Text = "";
+            for (let i = 0; i < h3Tags.length; i++) {
+                h3Text = h3Text + "<li>" + h3Tags[i].textContent + "</li>";
+                h3CharVal = h3CharVal + h3Text.length;
+                h3count = h3count + 1;
+            }
+            document.getElementById("h3-content").innerHTML = h3Text;
+            document.getElementById("h3Count").innerHTML = h3count;
+            document.getElementById("h3-characters").innerHTML = h3CharVal;
 
             // for P Tag
             const pTags = htmlDoc.getElementsByTagName('p');
@@ -20,7 +62,7 @@ function getH1() {
             let pCharVal = 0;
             let pText = "";
             for (let i = 0; i < pTags.length; i++) {
-                pText = pText + pTags[i].textContent + "<hr />";
+                pText = pText + "<li>" + pTags[i].textContent + "</li>";
                 pCharVal = pCharVal + pText.length;
                 pcount = pcount + 1;
             }

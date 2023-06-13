@@ -84,17 +84,19 @@ function getH1() {
             document.getElementById("imgCount").innerHTML = imgcount;
             document.getElementById("img-characters").innerHTML = imgCharVal;
 
-            // for IMG Tag
-
-            // let imgTags = htmlDoc.getElementsByTagName('img').attributes;
-            // let imgText = "";
-            // const imgCharVal = imgText.length;
-            // for (let i = 0; i < imgTags.length; i++) {
-            //     imgText += "<li>" + imgText[i].name + " = " + imgText[i].value + "</li>";
-            // }
-            // document.getElementById("img-content").innerHTML = imgText;
-            // document.getElementById("img-characters").innerHTML = imgTags;
-            // document.getElementById("img-characters").innerHTML = imgTags;
+            // for a Tag
+            const aTags = htmlDoc.getElementsByTagName('a');
+            let acount = 0;
+            let aCharVal = 0;
+            let aText = "";
+            for (let i = 0; i < aTags.length; i++) {
+                aText = aText + "<li>" + aTags[i].textContent + "</li>";
+                aCharVal = aCharVal + aText.length;
+                acount = acount + 1;
+            }
+            // document.getElementById("a-content").innerHTML = aText;
+            document.getElementById("aCount").innerHTML = acount;
+            document.getElementById("a-characters").innerHTML = aCharVal;
         });
     // console.log(urifetch);
 }

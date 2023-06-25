@@ -91,15 +91,24 @@ function getH1() {
             let aText = "";
             thisurl = window.location.href;
 
+            const genlink = [];
+            for (let i = 0; i < aTags.length; i++) {
+                genlink[i] = aTags[i].href;
+            }
+
+            let set1 = new Set(genlink);
+
+            // console.log(set1);
+            // console.log(genlink);
+
             for (let i = 0; i < aTags.length; i++) {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
                 // aText = aText + "<li>" + aTags[i].href + "</li>";
 
                 let glink = aTags[i].href;
-                console.log(aTags[i].href);
-
                 if (glink.startsWith(thisurl)) {
-                    aText = aText + "<li>" + glink + "</li>";
+                    let result = glink.replace(thisurl, urifetch);
+                    aText = aText + "<li>" + result + "</li>";
                 }
 
                 aCharVal = aCharVal + aText.length;

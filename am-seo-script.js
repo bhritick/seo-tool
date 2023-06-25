@@ -90,11 +90,12 @@ function getH1() {
             let aCharVal = 0;
             let aText = "";
             for (let i = 0; i < aTags.length; i++) {
-                aText = aText + "<li>" + aTags[i].textContent + "</li>";
+                // aText = aText + "<li>" + aTags[i].textContent + "</li>";
+                aText = aText + "<li>" + aTags[i].href + "</li>";
                 aCharVal = aCharVal + aText.length;
                 acount = acount + 1;
             }
-            // document.getElementById("a-content").innerHTML = aText;
+            document.getElementById("a-content").innerHTML = aText;
             document.getElementById("aCount").innerHTML = acount;
             document.getElementById("a-characters").innerHTML = aCharVal;
         });

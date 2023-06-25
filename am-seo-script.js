@@ -94,13 +94,14 @@ function getH1() {
                 // aText = aText + "<li>" + aTags[i].href + "</li>";
 
                 let glink = aTags[i].href;
-                // console.log(urifetch, glink)
+                let inlink = urifetch;
+                console.log(urifetch, glink)
 
-                if (glink.startsWith(urifetch)) {
-                    aText = aText + "<li>" + aTags[i].href + "</li>";
-                } else {
-                    console.log('Not Applicable');
-                }
+                // if (glink.startsWith(inlink)) {
+                //     aText = aText + "<li>" + aTags[i].href + "</li>";
+                // } else {
+                //     console.log(inlink);
+                // }
 
                 aCharVal = aCharVal + aText.length;
                 acount = acount + 1;

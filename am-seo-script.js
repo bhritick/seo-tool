@@ -89,9 +89,21 @@ function getH1() {
             let acount = 0;
             let aCharVal = 0;
             let aText = "";
+            // let text = urifetch;
+            // const emp = [urifetch];
             for (let i = 0; i < aTags.length; i++) {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
-                aText = aText + "<li>" + aTags[i].href + "</li>";
+                // if (text.match(urifetch)) {
+                // }
+
+                // inlink = aTags[i].href;
+                // if ()
+
+                // let text = urifetch;
+                let genlink = aTags[i].href;
+                let result = genlink.match(urifetch);
+
+                aText = aText + "<li>" + result + "</li>";
                 aCharVal = aCharVal + aText.length;
                 acount = acount + 1;
             }
@@ -99,5 +111,5 @@ function getH1() {
             document.getElementById("aCount").innerHTML = acount;
             document.getElementById("a-characters").innerHTML = aCharVal;
         });
-    // console.log(urifetch);
+    console.log(urifetch);
 }

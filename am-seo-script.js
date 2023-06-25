@@ -85,7 +85,9 @@ function getH1() {
             document.getElementById("img-characters").innerHTML = imgCharVal;
 
             // for a Tag
-            const aTags = htmlDoc.getElementsByTagName('a');
+            const aTags = htmlDoc.getElementsByTagName('a').href;
+            console.log(aTags);
+            // const aTags = htmlDoc.getElementsByTagName('a');
             let acount = 0;
             let aCharVal = 0;
             let aText = "";
@@ -93,15 +95,15 @@ function getH1() {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
                 // aText = aText + "<li>" + aTags[i].href + "</li>";
 
-                let glink = aTags[i].href;
-                let inlink = urifetch;
-                console.log(urifetch, glink)
 
-                // if (glink.startsWith(inlink)) {
-                //     aText = aText + "<li>" + aTags[i].href + "</li>";
-                // } else {
-                //     console.log(inlink);
-                // }
+                let glink = aTags[i].href;
+                // console.log(urifetch, glink)
+
+                if (glink.startsWith(urifetch)) {
+                    aText = aText + "<li>" + aTags[i].href + "</li>";
+                } else {
+                    console.log("else condition fired");
+                }
 
                 aCharVal = aCharVal + aText.length;
                 acount = acount + 1;

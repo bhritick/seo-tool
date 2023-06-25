@@ -93,9 +93,10 @@ function getH1() {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
                 // aText = aText + "<li>" + aTags[i].href + "</li>";
 
-                var url = aTags[i].href;
+                let glink = aTags[i].href;
+                // console.log(urifetch, glink)
 
-                if (url.startsWith(urifetch)) {
+                if (glink.startsWith(urifetch)) {
                     aText = aText + "<li>" + aTags[i].href + "</li>";
                 } else {
                     console.log('Not Applicable');

@@ -89,21 +89,18 @@ function getH1() {
             let acount = 0;
             let aCharVal = 0;
             let aText = "";
-            // let text = urifetch;
-            // const emp = [urifetch];
             for (let i = 0; i < aTags.length; i++) {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
-                // if (text.match(urifetch)) {
-                // }
+                // aText = aText + "<li>" + aTags[i].href + "</li>";
 
-                // inlink = aTags[i].href;
-                // if ()
+                var url = aTags[i].href;
 
-                // let text = urifetch;
-                let genlink = aTags[i].href;
-                let result = genlink.match(urifetch);
+                if (url.startsWith(urifetch)) {
+                    aText = aText + "<li>" + aTags[i].href + "</li>";
+                } else {
+                    console.log('Not Applicable');
+                }
 
-                aText = aText + "<li>" + result + "</li>";
                 aCharVal = aCharVal + aText.length;
                 acount = acount + 1;
             }
@@ -111,5 +108,5 @@ function getH1() {
             document.getElementById("aCount").innerHTML = acount;
             document.getElementById("a-characters").innerHTML = aCharVal;
         });
-    console.log(urifetch);
+    // console.log(urifetch);
 }

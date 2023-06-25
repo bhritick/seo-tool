@@ -94,20 +94,15 @@ function getH1() {
             const genlink = [];
             for (let i = 0; i < aTags.length; i++) {
                 genlink[i] = aTags[i].href;
-            }
-
-            let set1 = new Set(genlink);
-
-            // console.log(set1);
-            // console.log(genlink);
-
-            for (let i = 0; i < aTags.length; i++) {
+            }            
+            const uniqueArray = [...new Set(genlink)];
+            
+            for (let i = 0; i < uniqueArray.length; i++) {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
                 // aText = aText + "<li>" + aTags[i].href + "</li>";
-
-                let glink = aTags[i].href;
-                if (glink.startsWith(thisurl)) {
-                    let result = glink.replace(thisurl, urifetch);
+                
+                if (uniqueArray[i].startsWith(thisurl)) {
+                    let result = uniqueArray[i].replace(thisurl, urifetch);
                     aText = aText + "<li>" + result + "</li>";
                 }
 

@@ -85,18 +85,21 @@ function getH1() {
             document.getElementById("img-characters").innerHTML = imgCharVal;
 
             // for a Tag
-            const aTags = htmlDoc.getElementsByTagName('a');
+            let aTags = htmlDoc.getElementsByTagName('a');
             let acount = 0;
             let aCharVal = 0;
             let aText = "";
+            thisurl = window.location.href;
+
             for (let i = 0; i < aTags.length; i++) {
                 // aText = aText + "<li>" + aTags[i].textContent + "</li>";
                 // aText = aText + "<li>" + aTags[i].href + "</li>";
 
                 let glink = aTags[i].href;
+                console.log(aTags[i].href);
 
-                if (glink.startsWith('http://localhost/seo-tool/')) {
-                    aText = aText + "<li>" + aTags[i].href + "</li>";
+                if (glink.startsWith(thisurl)) {
+                    aText = aText + "<li>" + glink + "</li>";
                 }
 
                 aCharVal = aCharVal + aText.length;
@@ -106,5 +109,6 @@ function getH1() {
             document.getElementById("aCount").innerHTML = acount;
             document.getElementById("a-characters").innerHTML = aCharVal;
         });
+
     // console.log(urifetch);
 }

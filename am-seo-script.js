@@ -8,13 +8,6 @@ function getH1() {
             const htmlDoc = parser.parseFromString(html, 'text/html');
 
             // for h1 Tag
-            // const h1Tags = htmlDoc.getElementsByTagName('h1');
-            // const h1Text = h1Tags[0].textContent;
-            // const h1CharVal = h1Text.length;
-            // document.getElementById("h1-content").innerHTML = h1Text;
-            // document.getElementById("h1-characters").innerHTML = h1CharVal;
-
-            // for h1 Tag
             const h1Tags = htmlDoc.getElementsByTagName('h1');
             let h1count = 0;
             let h1CharVal = 0;

@@ -267,6 +267,7 @@
                 </div>
                 <div class="modal-body">
                     <p class="lead ico-good fs-6" id="htmlTitle"></p>
+                    <p class="lead ico-good fs-6" id="htmlH1"></p>
                 </div>
                 <!-- <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -299,15 +300,22 @@
 
                     // Call another function and pass the modified string
                     dataTitle(titleElement);
+
+                    // Get the h1 element
+                    var h1Tags = doc.getElementsByTagName("h1");
+                    const countH1 = h1Tags.length;
+
+                    // Call another function and pass the modified string
+                    dataH1(countH1);
+
                 })
                 .catch(error => {
                     console.error('Error fetching or parsing the webpage:', error);
                 });
         }
 
-        // Function to display a string
+        // Function to display a string for Title
         function dataTitle(str) {
-
             const titleElement = str
             if (titleElement) {
                 // Get the text content of the title element
@@ -316,12 +324,20 @@
                 // Calculate the character length of the title
                 const characterLength = title.length;
 
-                // console.log(`Title: ${title}`);
-                // console.log(`Character Length: ${characterLength}`);
-
                 document.getElementById('htmlTitle').innerHTML = `Title Length : ${characterLength}`;
             } else {
-                console.log('Title not found on the webpage.');
+                console.log('Title not found.');
+            }
+        }
+
+        // Function to display a details of H1
+        function dataH1(str) {
+            const h1Element = str
+            if (h1Element) {
+                // console.log(`Webpage used H1 tag: ${h1Element} time`);
+                document.getElementById('htmlH1').innerHTML = `H1 tag used : ${h1Element} time`;
+            } else {
+                console.log('H1 tag not found.');
             }
         }
 

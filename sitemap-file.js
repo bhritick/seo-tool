@@ -1,0 +1,23 @@
+function createAndDownloadFile() {
+    // Create a Blob with some content (e.g., a text file)
+    const fileContent = 'This is the content of the file.';
+    const blob = new Blob([fileContent], { type: 'text/plain' });
+
+    // Create a temporary download link
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'sitemap.txt';
+
+    // Trigger a click event to initiate the download
+    a.style.display = 'none';
+    document.body.appendChild(a);
+    a.click();
+
+    // Remove the temporary download link
+    document.body.removeChild(a);
+
+    // You can't automatically delete the file due to security restrictions
+    // Instruct the user to manually delete the file
+    alert('File has been downloaded. Please manually delete it when done.');
+}

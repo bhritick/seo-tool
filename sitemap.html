@@ -1,0 +1,98 @@
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CDN CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+
+    <style>
+        .bg-header {
+            background-image: url(./res/heqader-pic.jpg);
+            background-size: contain;
+            background-position: top center;
+            background-repeat: no-repeat;
+        }
+
+        .bg-header-next {
+            background: rgb(255, 255, 255);
+            background: linear-gradient(0deg, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 1) 60%, rgba(0, 0, 0, 0) 60%, rgba(0, 0, 0, 0) 100%);
+        }
+
+        .glass-bg {
+            background: linear-gradient(225deg,
+                    rgba(255, 255, 255, 0.5) 26%,
+                    rgba(0, 0, 0, 0.1) 74%);
+            /* background-blend-mode: ; */
+            /* box-shadow:
+                inset 0px 5px 5px 0px rgba(255, 255, 255, 0.1),
+                inset 0px -5px 5px 0px rgba(0, 0, 0, 0.1); */
+            backdrop-filter: blur(5px);
+            -webkit-backdrop-filter: blur(5px);
+        }
+
+        .text-shadow {
+            text-shadow: 3px 3px 9px #ffffff;
+        }
+    </style>
+
+    <title>Sitemap Generator</title>
+</head>
+
+<body>
+    <header class="bg-header">
+        <div class="container">
+            <div class="row">
+                <div class="col-12 my-5 py-5"></div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6 col-12">
+                    <div class="card shadow-sm glass-bg w-100 border-0 mt-5">
+                        <div class="card-body px-5">
+                            <div class="mb-3">
+                                <label class="lead text-shadow form-label fw-bold my-3">Website URL</label>
+                                <input type="url" class="form-control text-primary rounded-pill shadow-none mb-4 ps-4"
+                                    id="site-url" value="https://anupammondal.in"
+                                    placeholder="https://anupammondal.in">
+                            </div>
+                            <!-- <div class="mb-3">
+                                <button type="button" data-bs-toggle="modal" data-bs-target="#reportModal"
+                                    class="btn btn-light rounded-pill shadow-none px-5"
+                                    onclick="getUrl()">Submit</button>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 col-12">
+                    <div class="card shadow-sm glass-bg w-100 border-0 mt-5">
+                        <div class="card-body px-5">
+                            <h1 class="leadtext-shadow fw-bold fs-2 my-3">Sitemap Generator</h1>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-light rounded-pill shadow-none px-5"
+                                    onclick="createAndDownloadFile()">Download</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <footer class="bg-dark text-white fixed-bottom mt-5">
+        <div class="container">
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-center pt-3">Designed and Developed by <a class="text-white fw-bold"
+                            href="https://anupammondal.in">Anupam M</a></p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+<script src="create-sitemap.js"></script>
+
+</html>

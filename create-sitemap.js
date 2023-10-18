@@ -17,17 +17,17 @@ function generateSitemap(domain, pages) {
 
   // sitemap content structure
   const fileContent = `<?xml version="1.0" encoding="UTF-8"?>
-    <!-- Created using SEOtool.in - Free HTML and XML sitemap generator -->
-    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-      ${pages.map(page => `
-        <url>
-          <loc>${domain}${page}</loc>
-          <lastmod>${formattedDate}</lastmod>
-          <changefreq>always</changefreq>
-          <priority>1.0</priority>
-        </url>`).join('\n')}
-    </urlset>
-    <!-- Created using SEOtool.in - Free HTML and XML sitemap generator -->`;
+<!-- Created using SEOtool.in - Free HTML and XML sitemap generator -->
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  ${pages.map(page => `
+    <url>
+      <loc>${domain}${page}</loc>
+      <lastmod>${formattedDate}</lastmod>
+      <changefreq>always</changefreq>
+      <priority>1.0</priority>
+    </url>`).join('\n')}
+</urlset>
+<!-- Created using SEOtool.in - Free HTML and XML sitemap generator -->`;
 
   // Save the sitemap to a file
   // fs.writeFileSync('sitemap.xml', sitemap, 'utf-8');

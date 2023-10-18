@@ -1,6 +1,14 @@
 // const fs = require('fs');
+// function generateSitemap(domain, pages) {
+function generateSitemap() {
+  const domain = document.getElementById("site-url").value;
+  const pages = [
+    '/',
+    '/about',
+    '/services',
+    '/contact',
+  ];
 
-function generateSitemap(domain, pages) {
   // Get the current date
   const currentDate = new Date();
 
@@ -34,32 +42,44 @@ function generateSitemap(domain, pages) {
 
   const blob = new Blob([fileContent], { type: 'text/plain' });
 
-  // Create a temporary download link
-  const url = URL.createObjectURL(blob);
+
+  // Create an object URL for the Blob
+  const url = window.URL.createObjectURL(blob);
+
+  // Create a link element for downloading the file
   const a = document.createElement('a');
   a.href = url;
-  a.download = 'sitemap.xml';
+  a.download = 'sitemap.xml'; // Set the file name here
 
-  // Trigger a click event to initiate the download
-  a.style.display = 'none';
-  document.body.appendChild(a);
+  // Simulate a click to trigger the download
   a.click();
 
-  // Remove the temporary download link
-  document.body.removeChild(a);
+  // Clean up: Revoke the Object URL
+  window.URL.revokeObjectURL(url);
 
-  // You can't automatically delete the file due to security restrictions
-  // Instruct the user to manually delete the file
-  // alert('File has been downloaded. Please manually delete it when done.');
+
+  // Create a temporary download link
+  // const url = URL.createObjectURL(blob);
+  // const a = document.createElement('a');
+  // a.href = url;
+  // a.download = 'sitemap.xml';
+
+  // Trigger a click event to initiate the download
+  // a.style.display = 'none';
+  // document.body.appendChild(a);
+  // a.click();
+
+  // Remove the temporary download link
+  // document.body.removeChild(a);
 }
 
 // Example usage
-const domain = document.getElementById("site-url").value;
-const pages = [
-  '/',
-  '/about',
-  '/services',
-  '/contact',
-];
+// const domain = document.getElementById("site-url").value;
+// const pages = [
+//   '/',
+//   '/about',
+//   '/services',
+//   '/contact',
+// ];
 
-generateSitemap(domain, pages);
+// generateSitemap(domain, pages);

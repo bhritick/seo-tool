@@ -56,30 +56,4 @@ function generateSitemap() {
 
   // Clean up: Revoke the Object URL
   window.URL.revokeObjectURL(url);
-
-
-  // Create a temporary download link
-  // const url = URL.createObjectURL(blob);
-  // const a = document.createElement('a');
-  // a.href = url;
-  // a.download = 'sitemap.xml';
-
-  // Trigger a click event to initiate the download
-  // a.style.display = 'none';
-  // document.body.appendChild(a);
-  // a.click();
-
-  // Remove the temporary download link
-  // document.body.removeChild(a);
 }
-
-// Example usage
-// const domain = document.getElementById("site-url").value;
-// const pages = [
-//   '/',
-//   '/about',
-//   '/services',
-//   '/contact',
-// ];
-
-// generateSitemap(domain, pages);

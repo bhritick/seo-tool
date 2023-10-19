@@ -37,18 +37,23 @@
         .text-shadow {
             text-shadow: 3px 3px 9px #ffffff;
         }
+        #divcontainer p {
+            margin-bottom: 5px;
+        }
     </style>
 
     <title>Sitemap Generator</title>
 </head>
 
-<body>
-    <header class="bg-header">
+<body class="bg-header">
+    <header>
         <div class="container">
             <div class="row">
                 <div class="col-12 my-5 py-5"></div>
             </div>
         </div>
+    </header>
+    <section class="pb-5 mb-5">
         <div class="container">
             <div class="row">
                 <div class="col-md-6 col-12">
@@ -56,32 +61,30 @@
                         <div class="card-body px-5">
                             <div class="mb-3">
                                 <label class="lead text-shadow form-label fw-bold my-3">Website URL</label>
-                                <input type="url" class="form-control text-primary rounded-pill shadow-none mb-4 ps-4"
-                                    id="site-url" value="https://anupammondal.in"
-                                    placeholder="https://anupammondal.in">
+                                <input type="url" class="form-control text-primary shadow-none mb-4 ps-4"
+                                    id="site-url" value="https://nivesguru.in">
+                            </div>
+                            <div class="mb-3">
+                                <button type="button" class="btn btn-light shadow-none px-5"
+                                    onclick="getUrl()">Submit</button>
                             </div>
                             <!-- <div class="mb-3">
-                                <button type="button" data-bs-toggle="modal" data-bs-target="#reportModal"
-                                    class="btn btn-light rounded-pill shadow-none px-5"
-                                    onclick="getUrl()">Submit</button>
+                                <label class="form-label">Example textarea</label>
+                                <textarea class="form-control" id="linksTextarea"></textarea>
                             </div> -->
                         </div>
                     </div>
                 </div>
                 <div class="col-md-6 col-12">
-                    <div class="card shadow-sm glass-bg w-100 border-0 mt-5">
-                        <div class="card-body px-5">
-                            <h1 class="leadtext-shadow fw-bold fs-2 my-3">Sitemap Generator</h1>
-                            <div class="mb-3">
-                                <button type="button" class="btn btn-light rounded-pill shadow-none px-5"
-                                     onclick="generateSitemap()">Download</button>
-                            </div>
+                    <div class="card mt-5">
+                        <div class="card-body">
+                            <div id="divcontainer" class="d-block lead fs-6" style="height: 180px; overflow: auto;"></div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </header>
+    </section>
     <footer class="bg-dark text-white fixed-bottom mt-5">
         <div class="container">
             <div class="row">
@@ -93,7 +96,8 @@
         </div>
     </footer>
 </body>
-<script src="create-sitemap.js"></script>
+<!-- <script src="create-sitemap.js"></script> -->
+<script src="sitemap-pages.js"></script>
 <!-- <script src="file-download.js"></script> -->
 
 </html>

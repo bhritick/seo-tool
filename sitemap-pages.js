@@ -45,9 +45,10 @@ function getUrl() {
             uniqueArray.forEach((link) => {
                 if (link.length > 2) {
                     console.log(link);
-                    let p = document.createElement('p');
-                    p.textContent = targetUrl + "/" + link;
-                    document.querySelector('#divcontainer').appendChild(p);
+
+                    var textarea = document.getElementById("linksTextarea");
+                    textarea.value += link + "\n";
+                    // textarea.value += targetUrl + "/" + link + "\n";
                 }
             });
         })

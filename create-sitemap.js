@@ -32,7 +32,7 @@ function generateSitemap() {
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   ${pages.map(page => `
   <url>
-    <loc>${domain}\\${page}</loc>
+    <loc>${domain}\/${page}</loc>
     <lastmod>${formattedDate}</lastmod>
     <changefreq>always</changefreq>
     <priority>1.0</priority>

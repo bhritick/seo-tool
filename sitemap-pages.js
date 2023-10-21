@@ -28,7 +28,7 @@ async function fetchInternalLinks(url) {
         const internalLinksArray = Array.from(internalLinks).map((link) => link.getAttribute('href'));
         // Filter unique internal links
         const uniqueInternalLinksArray = [...new Set(internalLinksArray)];
-        
+
         return uniqueInternalLinksArray;
     } catch (error) {
         console.error('Error fetching and parsing the webpage:', error);
@@ -37,14 +37,18 @@ async function fetchInternalLinks(url) {
 }
 function getUrl() {
     const targetUrl = document.getElementById("site-url").value;
+
     // Call the function and log the internal links
     fetchInternalLinks(targetUrl)
         .then((internalLinks) => {
-            // console.log(internalLinks);
+            let url = targetUrl;
+            if (url.endsWith("/")) {
+                url = url.slice(0, -1); // Remove the last character in the string
+            }
             internalLinks.forEach((link) => {
-                 {
+                if (link != "./" && link != "#" && link != "/" && link != "../") {
                     var textarea = document.getElementById("linksTextarea");
-                    textarea.value += link + "\n";
+                    textarea.value += url + "/" + link + "\n";
                     return link;
                 }
             });

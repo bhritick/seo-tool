@@ -1,7 +1,4 @@
 // Define the URL of the webpage you want to fetch links from
-// const targetUrl = 'https://nivesguru.in';
-// const targetUrl = document.getElementById("site-url").value;
-
 // Function to fetch and parse internal links from a webpage
 async function fetchInternalLinks(url) {
     try {
@@ -29,8 +26,10 @@ async function fetchInternalLinks(url) {
 
         // Extract and return the href attribute of internal links
         const internalLinksArray = Array.from(internalLinks).map((link) => link.getAttribute('href'));
-
-        return internalLinksArray;
+        // Filter unique internal links
+        const uniqueInternalLinksArray = [...new Set(internalLinksArray)];
+        
+        return uniqueInternalLinksArray;
     } catch (error) {
         console.error('Error fetching and parsing the webpage:', error);
         return [];
@@ -41,14 +40,12 @@ function getUrl() {
     // Call the function and log the internal links
     fetchInternalLinks(targetUrl)
         .then((internalLinks) => {
-            const uniqueArray = [...new Set(internalLinks)];
-            uniqueArray.forEach((link) => {
-                if (link.length > 2) {
-                    console.log(link);
-
+            // console.log(internalLinks);
+            internalLinks.forEach((link) => {
+                 {
                     var textarea = document.getElementById("linksTextarea");
                     textarea.value += link + "\n";
-                    // textarea.value += targetUrl + "/" + link + "\n";
+                    return link;
                 }
             });
         })

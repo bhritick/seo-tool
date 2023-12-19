@@ -12,14 +12,23 @@
   <script>
     // Check if local storage is supported
     if (typeof(Storage) !== "undefined") {
-      // Store data
-      localStorage.setItem("username", "JohnDoe");
-
       // Retrieve data
       var storedUsername = localStorage.getItem("username");
 
-      // Display the retrieved data
-      alert("Welcome back, " + storedUsername + "!");
+      // Ask for username input
+      var userInput = prompt("Enter your username:");
+
+      // Store the entered username
+      localStorage.setItem("username", userInput);
+
+      // Display the retrieved or entered username
+      if (userInput) {
+        alert("Welcome, " + userInput + "!");
+      } else if (storedUsername) {
+        alert("Welcome back, " + storedUsername + "!");
+      } else {
+        alert("No username entered or stored.");
+      }
     } else {
       alert("Sorry, your browser does not support local storage.");
     }

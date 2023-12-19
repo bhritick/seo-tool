@@ -15,19 +15,35 @@
       // Retrieve data
       var storedUsername = localStorage.getItem("username");
 
-      // Ask for username input
-      var userInput = prompt("Enter your username:");
-
-      // Store the entered username
-      localStorage.setItem("username", userInput);
-
-      // Display the retrieved or entered username
-      if (userInput) {
-        alert("Welcome, " + userInput + "!");
-      } else if (storedUsername) {
-        alert("Welcome back, " + storedUsername + "!");
+      // Display username and edit button if username is already stored
+      if (storedUsername) {
+        document.write("<p>Welcome back, " + storedUsername + "!</p>");
+        document.write("<button onclick='editUsername()'>Edit Username</button>");
       } else {
-        alert("No username entered or stored.");
+        // Ask for username input if no username is stored
+        var userInput = prompt("Enter your username:");
+
+        // Store the entered username
+        localStorage.setItem("username", userInput);
+
+        // Display the entered username
+        if (userInput) {
+          alert("Welcome, " + userInput + "!");
+        } else {
+          alert("No username entered.");
+        }
+      }
+
+      // Function to edit the username
+      function editUsername() {
+        var newUsername = prompt("Enter your new username:");
+        if (newUsername) {
+          localStorage.setItem("username", newUsername);
+          alert("Username updated to " + newUsername + "!");
+          location.reload(); // Refresh the page to reflect the changes
+        } else {
+          alert("No new username entered.");
+        }
       }
     } else {
       alert("Sorry, your browser does not support local storage.");

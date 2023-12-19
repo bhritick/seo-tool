@@ -7,8 +7,16 @@
 </head>
 <body>
 
+<label for="textInput">Enter Text:</label>
+<input type="text" id="textInput" placeholder="Type your text here">
+
+<button onclick="generateImage()">Generate Image</button>
+
 <script>
-  function generateImage(word) {
+  function generateImage() {
+    // Get the entered text
+    var word = document.getElementById('textInput').value;
+
     // Create a new canvas element
     var canvas = document.createElement('canvas');
     canvas.width = 250;
@@ -43,12 +51,16 @@
     downloadLink.download = 'generated_image.png';
     downloadLink.textContent = 'Download Image';
 
-    // Append the link to the body
+    // Remove previous download link (if any)
+    var previousLink = document.getElementById('downloadLink');
+    if (previousLink) {
+      document.body.removeChild(previousLink);
+    }
+
+    // Append the new link to the body
+    downloadLink.id = 'downloadLink';
     document.body.appendChild(downloadLink);
   }
-
-  // Example usage:
-  generateImage('Hello');
 </script>
 
 </body>

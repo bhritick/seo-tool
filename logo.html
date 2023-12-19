@@ -1,70 +1,45 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Logo Generator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            margin: 50px;
-        }
-        #logoContainer {
-            margin-top: 20px;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 </head>
 <body>
-    <h1>Logo Generator</h1>
-    
-    <label for="brandName">Enter your brand name:</label>
-    <input type="text" id="brandName" placeholder="Your Brand">
 
-    <button onclick="generateLogo()">Generate Logo</button>
+  <input type="text" id="inputWord" placeholder="Enter a word">
+  <button onclick="generateImage()">Generate Image</button>
+  <div id="imageContainer"></div>
 
-    <div id="logoContainer"></div>
+  <script>
+    function generateImage() {
+      var word = document.getElementById('inputWord').value;
+      var container = document.getElementById('imageContainer');
 
-    <script>
-        function generateLogo() {
-            const brandName = document.getElementById('brandName').value;
-            const logoContainer = document.getElementById('logoContainer');
+      container.innerHTML = ''; // Clear previous content
 
-            // Simple logo generation (you can replace this with your own logic)
-            const logoText = document.createElement('p');
-            logoText.textContent = brandName;
-            logoText.style.fontWeight = 'bold';
-            logoText.style.fontSize = '512px';
-            logoText.style.color = 'blue';
+      // Create a div with the user-provided word
+      var wordDiv = document.createElement('div');
+      wordDiv.innerText = word;
+      container.appendChild(wordDiv);
 
-            logoContainer.innerHTML = '';
-            logoContainer.appendChild(logoText);
+      // Use html2canvas to capture the div and convert it to an image
+      html2canvas(container).then(function(canvas) {
+        // Convert canvas to data URL
+        var imageDataUrl = canvas.toDataURL('image/png');
 
-            // Create a download link for the logo
-            const downloadLink = document.createElement('a');
-            downloadLink.href = 'data:image/png;base64,' + btoa(unescape(encodeURIComponent(generateLogoAsImage(logoContainer))));
-            downloadLink.download = 'logo.png';
-            downloadLink.textContent = 'Download Logo';
+        // Create an image element with the data URL
+        var imageElement = document.createElement('img');
+        imageElement.src = imageDataUrl;
+        imageElement.width = 250;
+        imageElement.height = 250;
 
-            logoContainer.appendChild(document.createElement('br'));
-            logoContainer.appendChild(downloadLink);
-        }
+        // Append the image to the document
+        container.innerHTML = '';
+        container.appendChild(imageElement);
+      });
+    }
+  </script>
 
-        function generateLogoAsImage(element) {
-            const svgString = new XMLSerializer().serializeToString(element);
-            const canvas = document.createElement('canvas');
-            const ctx = canvas.getContext('2d');
-
-            const img = new Image();
-            img.src = 'data:image/svg+xml;base64,' + btoa(svgString);
-
-            canvas.width = element.offsetWidth;
-            canvas.height = element.offsetHeight;
-
-            ctx.drawImage(img, 0, 0);
-
-            return canvas.toDataURL('image/png');
-        }
-    </script>
 </body>
 </html>

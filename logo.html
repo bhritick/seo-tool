@@ -1,36 +1,55 @@
-function generateImage(word) {
-  // Create a new canvas element
-  var canvas = document.createElement('canvas');
-  canvas.width = 250;
-  canvas.height = 250;
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Generator</title>
+</head>
+<body>
 
-  // Get the 2D rendering context
-  var ctx = canvas.getContext('2d');
+<script>
+  function generateImage(word) {
+    // Create a new canvas element
+    var canvas = document.createElement('canvas');
+    canvas.width = 250;
+    canvas.height = 250;
 
-  // Set background color
-  ctx.fillStyle = '#ffffff'; // You can change this to any color
-  ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // Get the 2D rendering context
+    var ctx = canvas.getContext('2d');
 
-  // Set text properties
-  ctx.font = '20px Arial';
-  ctx.fillStyle = '#000000'; // You can change this to any color
-  ctx.textAlign = 'center';
-  ctx.textBaseline = 'middle';
+    // Set background color
+    ctx.fillStyle = '#ffffff'; // You can change this to any color
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  // Position the text in the center
-  var x = canvas.width / 2;
-  var y = canvas.height / 2;
+    // Set text properties
+    ctx.font = '20px Arial';
+    ctx.fillStyle = '#000000'; // You can change this to any color
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
 
-  // Draw the text on the canvas
-  ctx.fillText(word, x, y);
+    // Position the text in the center
+    var x = canvas.width / 2;
+    var y = canvas.height / 2;
 
-  // Create an image from the canvas
-  var dataURL = canvas.toDataURL('image/png');
+    // Draw the text on the canvas
+    ctx.fillText(word, x, y);
 
-  // You can use the dataURL or convert it to a blob and create a downloadable link
-  // For simplicity, let's just log the dataURL for now
-  console.log(dataURL);
-}
+    // Create an image from the canvas
+    var dataURL = canvas.toDataURL('image/png');
 
-// Example usage:
-generateImage('Hello');
+    // Create a download link
+    var downloadLink = document.createElement('a');
+    downloadLink.href = dataURL;
+    downloadLink.download = 'generated_image.png';
+    downloadLink.textContent = 'Download Image';
+
+    // Append the link to the body
+    document.body.appendChild(downloadLink);
+  }
+
+  // Example usage:
+  generateImage('Hello');
+</script>
+
+</body>
+</html>

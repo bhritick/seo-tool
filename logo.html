@@ -1,42 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Image Generator</title>
-  <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
-</head>
-<body>
-  <label for="wordInput">Enter a word:</label>
-  <input type="text" id="wordInput">
-  <button onclick="generateImage()">Generate Image</button>
+function generateImage(word) {
+  // Create a new canvas element
+  var canvas = document.createElement('canvas');
+  canvas.width = 250;
+  canvas.height = 250;
 
-  <div id="result"></div>
+  // Get the 2D rendering context
+  var ctx = canvas.getContext('2d');
 
-  <script>
-    function generateImage() {
-      const word = document.getElementById('wordInput').value;
+  // Set background color
+  ctx.fillStyle = '#ffffff'; // You can change this to any color
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Create a div with the specified word
-      const div = document.createElement('div');
-      div.innerText = word;
-      div.style.fontSize = '24px';
-      div.style.width = '250px';
-      div.style.height = '250px';
-      div.style.display = 'flex';
-      div.style.alignItems = 'center';
-      div.style.justifyContent = 'center';
+  // Set text properties
+  ctx.font = '20px Arial';
+  ctx.fillStyle = '#000000'; // You can change this to any color
+  ctx.textAlign = 'center';
+  ctx.textBaseline = 'middle';
 
-      // Convert the div to an image using html2canvas
-      html2canvas(div).then(canvas => {
-        // Convert the canvas to a data URL
-        const dataUrl = canvas.toDataURL();
+  // Position the text in the center
+  var x = canvas.width / 2;
+  var y = canvas.height / 2;
 
-        // Display the result as an image
-        const resultContainer = document.getElementById('result');
-        resultContainer.innerHTML = `<img src="${dataUrl}" alt="Generated Image">`;
-      });
-    }
-  </script>
-</body>
-</html>
+  // Draw the text on the canvas
+  ctx.fillText(word, x, y);
+
+  // Create an image from the canvas
+  var dataURL = canvas.toDataURL('image/png');
+
+  // You can use the dataURL or convert it to a blob and create a downloadable link
+  // For simplicity, let's just log the dataURL for now
+  console.log(dataURL);
+}
+
+// Example usage:
+generateImage('Hello');

@@ -3,43 +3,40 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Generator</title>
   <script src="https://html2canvas.hertzen.com/dist/html2canvas.js"></script>
 </head>
 <body>
-
-  <input type="text" id="inputWord" placeholder="Enter a word">
+  <label for="wordInput">Enter a word:</label>
+  <input type="text" id="wordInput">
   <button onclick="generateImage()">Generate Image</button>
-  <div id="imageContainer"></div>
+
+  <div id="result"></div>
 
   <script>
     function generateImage() {
-      var word = document.getElementById('inputWord').value;
-      var container = document.getElementById('imageContainer');
+      const word = document.getElementById('wordInput').value;
 
-      container.innerHTML = ''; // Clear previous content
+      // Create a div with the specified word
+      const div = document.createElement('div');
+      div.innerText = word;
+      div.style.fontSize = '24px';
+      div.style.width = '250px';
+      div.style.height = '250px';
+      div.style.display = 'flex';
+      div.style.alignItems = 'center';
+      div.style.justifyContent = 'center';
 
-      // Create a div with the user-provided word
-      var wordDiv = document.createElement('div');
-      wordDiv.innerText = word;
-      container.appendChild(wordDiv);
+      // Convert the div to an image using html2canvas
+      html2canvas(div).then(canvas => {
+        // Convert the canvas to a data URL
+        const dataUrl = canvas.toDataURL();
 
-      // Use html2canvas to capture the div and convert it to an image
-      html2canvas(container).then(function(canvas) {
-        // Convert canvas to data URL
-        var imageDataUrl = canvas.toDataURL('image/png');
-
-        // Create an image element with the data URL
-        var imageElement = document.createElement('img');
-        imageElement.src = imageDataUrl;
-        imageElement.width = 250;
-        imageElement.height = 250;
-
-        // Append the image to the document
-        container.innerHTML = '';
-        container.appendChild(imageElement);
+        // Display the result as an image
+        const resultContainer = document.getElementById('result');
+        resultContainer.innerHTML = `<img src="${dataUrl}" alt="Generated Image">`;
       });
     }
   </script>
-
 </body>
 </html>

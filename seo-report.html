@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Bootstrap demo</title>
+  </head>
+  <body>
+    <h1>Hello, world!</h1>
+<script>
+// A function that takes a URL as an input and returns an SEO analysis report as an output
+function seoAnalysis(url) {
+  // Use the Fetch API to get the HTML content of the URL
+  fetch(url)
+    .then((response) => response.text())
+    .then((html) => {
+      // Use a DOM parser to convert the HTML string into a document object
+      let parser = new DOMParser();
+      let doc = parser.parseFromString(html, "text/html");
+
+      // Initialize an empty report object
+      let report = {};
+
+      // Get the title element and check its length and relevance
+      let title = doc.querySelector("title");
+      if (title) {
+        report.title = title.textContent;
+        report.titleLength = title.textContent.length;
+        if (report.titleLength < 10 || report.titleLength > 60) {
+          report.titleWarning =
+            "The title should be between 10 and 60 characters long.";
+        }
+        if (!report.title.includes(url.split("/")[2])) {
+          report.titleWarning =
+            "The title should include the domain name of the website.";
+        }
+      } else {
+        report.titleWarning = "The page has no title element.";
+      }
+
+      // Get the meta description element and check its length and relevance
+      let description = doc.querySelector('meta[name="description"]');
+      if (description) {
+        report.description = description.getAttribute("content");
+        report.descriptionLength = report.description.length;
+        if (report.descriptionLength < 50 || report.descriptionLength > 160) {
+          report.descriptionWarning =
+            "The description should be between 50 and 160 characters long.";
+        }
+        if (!report.description.includes(url.split("/")[2])) {
+          report.descriptionWarning =
+            "The description should include the domain name of the website.";
+        }
+      } else {
+        report.descriptionWarning = "The page has no meta description element.";
+      }
+
+      // Get the h1 element and check its existence and relevance
+      let h1 = doc.querySelector("h1");
+      if (h1) {
+        report.h1 = h1.textContent;
+        if (!report.h1.includes(url.split("/")[2])) {
+          report.h1Warning =
+            "The h1 should include the domain name of the website.";
+        }
+      } else {
+        report.h1Warning = "The page has no h1 element.";
+      }
+
+      // Get the canonical link element and check its existence and validity
+      let canonical = doc.querySelector('link[rel="canonical"]');
+      if (canonical) {
+        report.canonical = canonical.getAttribute("href");
+        if (report.canonical !== url) {
+          report.canonicalWarning =
+            "The canonical link does not match the requested URL.";
+        }
+      } else {
+        report.canonicalWarning = "The page has no canonical link element.";
+      }
+
+      // Get the number of internal and external links on the page
+      let links = doc.querySelectorAll("a");
+      report.internalLinks = 0;
+      report.externalLinks = 0;
+      for (let link of links) {
+        let href = link.getAttribute("href");
+        if (href) {
+          if (href.startsWith(url.split("/")[2])) {
+            report.internalLinks++;
+          } else {
+            report.externalLinks++;
+          }
+        }
+      }
+
+      // Get the number of images on the page and check their alt attributes
+      let images = doc.querySelectorAll("img");
+      report.images = images.length;
+      report.imagesWithoutAlt = 0;
+      for (let image of images) {
+        let alt = image.getAttribute("alt");
+        if (!alt || alt === "") {
+          report.imagesWithoutAlt++;
+        }
+      }
+      if (report.imagesWithoutAlt > 0) {
+        report.imagesWarning =
+          "Some images on the page have no alt attribute or an empty alt attribute.";
+      }
+
+      // Return the report object as a JSON string
+      return JSON.stringify(report, null, 2);
+    })
+    .catch((error) => {
+      // Handle any errors that may occur
+      console.error(error);
+      return "An error occurred while fetching or parsing the URL.";
+    });
+}
+
+</script>
+  </body>
+</html>

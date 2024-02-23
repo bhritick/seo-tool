@@ -137,7 +137,7 @@
                         report.titleLength = title.textContent.length;
                         // display in console
                         myArray.push(report.titleLength);
-                        console.log(myArray[0]);
+                        console.log("Title Length: " + myArray[0]);
                         // display in console
                         if (report.titleLength < 10 || report.titleLength > 60) {
                             report.titleWarning =
@@ -157,7 +157,7 @@
                         report.descriptionLength = report.description.length;
                         // display in console
                         myArray.push(report.descriptionLength);
-                        console.log(myArray[1]);
+                        console.log("Meta Description Length: " + myArray[1]);
                         // display in console
                         if (report.descriptionLength < 50 || report.descriptionLength > 160) {
                             report.descriptionWarning =
@@ -175,7 +175,7 @@
                     report.h1tag = h1tag.length;
                     // display in console
                     myArray.push(report.h1tag);
-                    console.log(myArray[2]);
+                    console.log("H1: " + myArray[2]);
                     // display in console
 
                     let h1 = doc.querySelector("h1");
@@ -216,6 +216,10 @@
 
                     let images = doc.querySelectorAll("img");
                     report.images = images.length;
+                    // display in console
+                    myArray.push(report.images);
+                    console.log("Images: " + myArray[3]);
+                    // display in console
                     report.imagesWithoutAlt = 0;
                     for (let image of images) {
                         let alt = image.getAttribute("alt");

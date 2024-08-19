@@ -16,6 +16,8 @@
         <p id="h1Result"></p>
         <p id="h2Result"></p>
         <p id="h3Result"></p>
+        <p id="anchorResult"></p>
+        <p id="imageResult"></p>
     </div>
 
     <script>
@@ -50,12 +52,20 @@
                 const h3Count = h3Tags.length;
                 const h3 = h3Count > 0 ? Array.from(h3Tags).map(h => h.innerText).join(', ') : 'No H3 tags found';
 
+                const anchorTags = doc.querySelectorAll('a');
+                const anchorCount = anchorTags.length;
+
+                const imageTags = doc.querySelectorAll('img');
+                const imageCount = imageTags.length;
+
                 // Display the results
                 document.getElementById('titleResult').innerText = `Title: ${title} (Length: ${titleLength})`;
                 document.getElementById('metaDescriptionResult').innerText = `Meta Description: ${metaDescription} (Length: ${metaDescriptionLength})`;
                 document.getElementById('h1Result').innerText = `H1: ${h1} (Count: ${h1Count})`;
                 document.getElementById('h2Result').innerText = `H2: ${h2} (Count: ${h2Count})`;
                 document.getElementById('h3Result').innerText = `H3: ${h3} (Count: ${h3Count})`;
+                document.getElementById('anchorResult').innerText = `Anchor Tags: ${anchorCount}`;
+                document.getElementById('imageResult').innerText = `Image Tags: ${imageCount}`;
 
             } catch (error) {
                 console.error('Error fetching the URL:', error);

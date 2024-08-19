@@ -18,6 +18,8 @@
         <p id="h3Result"></p>
         <p id="anchorResult"></p>
         <p id="imageResult"></p>
+        <p id="faviconResult"></p>
+        <p id="altResult"></p>
     </div>
 
     <script>
@@ -58,6 +60,11 @@
                 const imageTags = doc.querySelectorAll('img');
                 const imageCount = imageTags.length;
 
+                const faviconElement = doc.querySelector('link[rel="icon"]') || doc.querySelector('link[rel="shortcut icon"]');
+                const favicon = faviconElement ? faviconElement.getAttribute('href') : 'No favicon found';
+
+                const imagesWithBlankAlt = Array.from(imageTags).filter(img => !img.getAttribute('alt') || img.getAttribute('alt').trim() === '').length;
+
                 // Display the results
                 document.getElementById('titleResult').innerText = `Title: ${title} (Length: ${titleLength})`;
                 document.getElementById('metaDescriptionResult').innerText = `Meta Description: ${metaDescription} (Length: ${metaDescriptionLength})`;
@@ -66,6 +73,8 @@
                 document.getElementById('h3Result').innerText = `H3: ${h3} (Count: ${h3Count})`;
                 document.getElementById('anchorResult').innerText = `Anchor Tags: ${anchorCount}`;
                 document.getElementById('imageResult').innerText = `Image Tags: ${imageCount}`;
+                document.getElementById('faviconResult').innerText = `Favicon: ${favicon}`;
+                document.getElementById('altResult').innerText = `Images with Blank Alt Attributes: ${imagesWithBlankAlt}`;
 
             } catch (error) {
                 console.error('Error fetching the URL:', error);

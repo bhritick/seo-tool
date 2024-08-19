@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SEO Analyzer</title>
+</head>
+<body>
+    <h1>SEO Analyzer</h1>
+    <input type="text" id="urlInput" placeholder="Enter website URL">
+    <button id="analyzeBtn">Analyze</button>
+    <div id="results">
+        <h2>Results:</h2>
+        <p id="titleResult"></p>
+        <p id="metaDescriptionResult"></p>
+        <p id="h1Result"></p>
+        <p id="h2Result"></p>
+    </div>
+
+    <script>
+        async function analyzeSEO(url) {
+            try {
+                // Fetch the HTML content of the URL
+                const response = await fetch(url);
+                const text = await response.text();
+
+                // Create a DOM parser
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+
+                // Analyze SEO elements
+                const title = doc.querySelector('title') ? doc.querySelector('title').innerText : 'No title tag found';
+                const metaDescription = doc.querySelector('meta[name="description"]') ? doc.querySelector('meta[name="description"]').getAttribute('content') : 'No meta description found';
+                const h1 = doc.querySelector('h1') ? doc.querySelector('h1').innerText : 'No H1 tag found';
+                const h2 = doc.querySelectorAll('h2').length > 0 ? Array.from(doc.querySelectorAll('h2')).map(h => h.innerText).join(', ') : 'No H2 tags found';
+
+                // Display the results
+                document.getElementById('titleResult').innerText = `Title: ${title}`;
+                document.getElementById('metaDescriptionResult').innerText = `Meta Description: ${metaDescription}`;
+                document.getElementById('h1Result').innerText = `H1: ${h1}`;
+                document.getElementById('h2Result').innerText = `H2: ${h2}`;
+
+            } catch (error) {
+                console.error('Error fetching the URL:', error);
+            }
+        }
+
+        // Add an event listener to the analyze button
+        document.getElementById('analyzeBtn').addEventListener('click', () => {
+            const url = document.getElementById('urlInput').value;
+            analyzeSEO(url);
+        });
+    </script>
+</body>
+</html>

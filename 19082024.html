@@ -29,14 +29,20 @@
                 const doc = parser.parseFromString(text, 'text/html');
 
                 // Analyze SEO elements
-                const title = doc.querySelector('title') ? doc.querySelector('title').innerText : 'No title tag found';
-                const metaDescription = doc.querySelector('meta[name="description"]') ? doc.querySelector('meta[name="description"]').getAttribute('content') : 'No meta description found';
+                const titleElement = doc.querySelector('title');
+                const title = titleElement ? titleElement.innerText : 'No title tag found';
+                const titleLength = titleElement ? title.length : 0;
+
+                const metaDescriptionElement = doc.querySelector('meta[name="description"]');
+                const metaDescription = metaDescriptionElement ? metaDescriptionElement.getAttribute('content') : 'No meta description found';
+                const metaDescriptionLength = metaDescriptionElement ? metaDescription.length : 0;
+
                 const h1 = doc.querySelector('h1') ? doc.querySelector('h1').innerText : 'No H1 tag found';
                 const h2 = doc.querySelectorAll('h2').length > 0 ? Array.from(doc.querySelectorAll('h2')).map(h => h.innerText).join(', ') : 'No H2 tags found';
 
                 // Display the results
-                document.getElementById('titleResult').innerText = `Title: ${title}`;
-                document.getElementById('metaDescriptionResult').innerText = `Meta Description: ${metaDescription}`;
+                document.getElementById('titleResult').innerText = `Title: ${title} (Length: ${titleLength})`;
+                document.getElementById('metaDescriptionResult').innerText = `Meta Description: ${metaDescription} (Length: ${metaDescriptionLength})`;
                 document.getElementById('h1Result').innerText = `H1: ${h1}`;
                 document.getElementById('h2Result').innerText = `H2: ${h2}`;
 

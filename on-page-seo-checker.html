@@ -21,14 +21,16 @@
 <body>
     <h1>On-Page SEO Checker</h1>
     <input type="text" id="urlInput" placeholder="Enter URL" size="50">
+    <input type="text" id="keywordInput" placeholder="Enter Primary Keyword" size="50">
     <button onclick="checkOnPageSEO()">Check SEO</button>
     <div class="results" id="results"></div>
 
     <script>
         async function checkOnPageSEO() {
             const url = document.getElementById('urlInput').value;
-            if (!url) {
-                alert('Please enter a URL');
+            const keyword = document.getElementById('keywordInput').value;
+            if (!url || !keyword) {
+                alert('Please enter both URL and Primary Keyword');
                 return;
             }
 
@@ -44,27 +46,27 @@
                 const title = doc.querySelector('title');
                 results.title = title ? title.textContent : '';
                 results.titleLength = results.title.length;
-                results.titleHasKeyword = results.title.includes('your-keyword');
+                results.titleHasKeyword = results.title.includes(keyword);
 
                 // Check Meta Description
                 const metaDescription = doc.querySelector('meta[name="description"]');
                 results.metaDescription = metaDescription ? metaDescription.getAttribute('content') : '';
                 results.metaDescriptionLength = results.metaDescription.length;
-                results.metaDescriptionHasKeyword = results.metaDescription.includes('your-keyword');
+                results.metaDescriptionHasKeyword = results.metaDescription.includes(keyword);
 
                 // Check H1 Tag
                 const h1 = doc.querySelector('h1');
                 results.h1 = h1 ? h1.textContent : '';
-                results.h1HasKeyword = results.h1.includes('your-keyword');
+                results.h1HasKeyword = results.h1.includes(keyword);
 
                 // Check URL Slug
                 const urlSlug = new URL(url).pathname;
                 results.urlSlug = urlSlug;
-                results.urlSlugHasKeyword = urlSlug.includes('your-keyword');
+                results.urlSlugHasKeyword = urlSlug.includes(keyword);
 
                 // Check Body Content for Keywords
                 const bodyText = doc.body.textContent;
-                results.bodyHasKeyword = bodyText.includes('your-keyword');
+                results.bodyHasKeyword = bodyText.includes(keyword);
 
                 // Check Internal Links
                 const internalLinks = doc.querySelectorAll('a[href^="/"]').length;

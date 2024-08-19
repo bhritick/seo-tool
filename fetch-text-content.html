@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch Page Text</title>
+</head>
+<body>
+    <h1>Fetch Page Text Content</h1>
+    <form id="urlForm">
+        <label for="urlInput">Enter URL:</label>
+        <input type="text" id="urlInput" name="url" required>
+        <button type="submit">Fetch Text</button>
+    </form>
+    <pre id="output"></pre>
+
+    <script>
+        document.getElementById('urlForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const url = document.getElementById('urlInput').value;
+            try {
+                const response = await fetch(url);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                }
+                const text = await response.text();
+                document.getElementById('output').textContent = text;
+            } catch (error) {
+                console.error('Error fetching page text:', error);
+                document.getElementById('output').textContent = 'Error fetching page text: ' + error.message;
+            }
+        });
+    </script>
+</body>
+</html>

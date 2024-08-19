@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch Page Text</title>
+    <title>Fetch Page Text Content</title>
 </head>
 <body>
     <h1>Fetch Page Text Content</h1>
@@ -12,7 +12,7 @@
         <input type="text" id="urlInput" name="url" required>
         <button type="submit">Fetch Text</button>
     </form>
-    <pre id="output"></pre>
+    <div id="output"></div>
 
     <script>
         document.getElementById('urlForm').addEventListener('submit', async function(event) {
@@ -23,8 +23,15 @@
                 if (!response.ok) {
                     throw new Error(`HTTP error! Status: ${response.status}`);
                 }
-                const text = await response.text();
-                document.getElementById('output').textContent = text;
+                const html = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(html, 'text/html');
+                const elements = doc.querySelectorAll('h1, h2, h3, h4, h5, h6, p, li');
+                let content = '';
+                elements.forEach(element => {
+                    content += `<${element.tagName.toLowerCase()}>${element.textContent}</${element.tagName.toLowerCase()}>`;
+                });
+                document.getElementById('output').innerHTML = content;
             } catch (error) {
                 console.error('Error fetching page text:', error);
                 document.getElementById('output').textContent = 'Error fetching page text: ' + error.message;

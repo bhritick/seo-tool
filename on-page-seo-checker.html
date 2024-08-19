@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>On-Page SEO Checker</title>
+</head>
+<body>
+    <script>
+        async function checkOnPageSEO(url) {
+            try {
+                const response = await fetch(url);
+                const text = await response.text();
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(text, 'text/html');
+
+                const results = {};
+
+                // Check Title Tag
+                const title = doc.querySelector('title');
+                results.title = title ? title.textContent : '';
+                results.titleLength = results.title.length;
+                results.titleHasKeyword = results.title.includes('your-keyword');
+
+                // Check Meta Description
+                const metaDescription = doc.querySelector('meta[name="description"]');
+                results.metaDescription = metaDescription ? metaDescription.getAttribute('content') : '';
+                results.metaDescriptionLength = results.metaDescription.length;
+                results.metaDescriptionHasKeyword = results.metaDescription.includes('your-keyword');
+
+                // Check H1 Tag
+                const h1 = doc.querySelector('h1');
+                results.h1 = h1 ? h1.textContent : '';
+                results.h1HasKeyword = results.h1.includes('your-keyword');
+
+                // Check URL Slug
+                const urlSlug = new URL(url).pathname;
+                results.urlSlug = urlSlug;
+                results.urlSlugHasKeyword = urlSlug.includes('your-keyword');
+
+                // Check Body Content for Keywords
+                const bodyText = doc.body.textContent;
+                results.bodyHasKeyword = bodyText.includes('your-keyword');
+
+                // Check Internal Links
+                const internalLinks = doc.querySelectorAll('a[href^="/"]').length;
+                results.internalLinks = internalLinks;
+
+                // Check Images for Alt Text
+                const images = doc.querySelectorAll('img');
+                results.imagesWithAlt = Array.from(images).filter(img => img.getAttribute('alt')).length;
+                results.totalImages = images.length;
+
+                // Check for Schema Markup
+                const schema = doc.querySelectorAll('script[type="application/ld+json"]').length;
+                results.schemaMarkup = schema > 0;
+
+                return results;
+            } catch (error) {
+                console.error('Error fetching the URL:', error);
+                return null;
+            }
+        }
+
+        // Example usage
+        checkOnPageSEO('https://example.com').then(results => console.log(results));
+    </script>
+</body>
+</html>

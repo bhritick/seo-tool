@@ -15,6 +15,7 @@
         <p id="metaDescriptionResult"></p>
         <p id="h1Result"></p>
         <p id="h2Result"></p>
+        <p id="h3Result"></p>
     </div>
 
     <script>
@@ -37,14 +38,24 @@
                 const metaDescription = metaDescriptionElement ? metaDescriptionElement.getAttribute('content') : 'No meta description found';
                 const metaDescriptionLength = metaDescriptionElement ? metaDescription.length : 0;
 
-                const h1 = doc.querySelector('h1') ? doc.querySelector('h1').innerText : 'No H1 tag found';
-                const h2 = doc.querySelectorAll('h2').length > 0 ? Array.from(doc.querySelectorAll('h2')).map(h => h.innerText).join(', ') : 'No H2 tags found';
+                const h1Tags = doc.querySelectorAll('h1');
+                const h1Count = h1Tags.length;
+                const h1 = h1Count > 0 ? h1Tags[0].innerText : 'No H1 tag found';
+
+                const h2Tags = doc.querySelectorAll('h2');
+                const h2Count = h2Tags.length;
+                const h2 = h2Count > 0 ? Array.from(h2Tags).map(h => h.innerText).join(', ') : 'No H2 tags found';
+
+                const h3Tags = doc.querySelectorAll('h3');
+                const h3Count = h3Tags.length;
+                const h3 = h3Count > 0 ? Array.from(h3Tags).map(h => h.innerText).join(', ') : 'No H3 tags found';
 
                 // Display the results
                 document.getElementById('titleResult').innerText = `Title: ${title} (Length: ${titleLength})`;
                 document.getElementById('metaDescriptionResult').innerText = `Meta Description: ${metaDescription} (Length: ${metaDescriptionLength})`;
-                document.getElementById('h1Result').innerText = `H1: ${h1}`;
-                document.getElementById('h2Result').innerText = `H2: ${h2}`;
+                document.getElementById('h1Result').innerText = `H1: ${h1} (Count: ${h1Count})`;
+                document.getElementById('h2Result').innerText = `H2: ${h2} (Count: ${h2Count})`;
+                document.getElementById('h3Result').innerText = `H3: ${h3} (Count: ${h3Count})`;
 
             } catch (error) {
                 console.error('Error fetching the URL:', error);

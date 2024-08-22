@@ -2,30 +2,44 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Fetch composer.json</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch composer.json Details</title>
 </head>
 <body>
-    <h1>Fetch json Data</h1>
-    <input type="text" id="urlInput" placeholder="Enter website URL">
-    <button onclick="fetchComposerJson()">Fetch</button>
-    <pre id="jsonData"></pre>
+    <div>
+        <h2>Enter Website URL</h2>
+        <input type="text" id="url-input" placeholder="Enter website URL">
+        <button onclick="fetchComposerDetails()">Fetch Details</button>
+    </div>
+    <div id="composer-details" style="display: none;">
+        <h2>Composer Details</h2>
+        <p><strong>Name:</strong> <span id="name"></span></p>
+        <p><strong>Description:</strong> <span id="description"></span></p>
+        <p><strong>Homepage:</strong> <span id="homepage"></span></p>
+    </div>
 
     <script>
-        async function fetchComposerJson() {
-            const url = document.getElementById('urlInput').value;
-            const proxyUrl = 'https://api.codetabs.com/v1/proxy/?quest=';
-            const composerUrl = `${proxyUrl}${url}composer.json`;
+        function fetchComposerDetails() {
+            const url = document.getElementById('url-input').value;
+            const proxyUrl = `http://localhost:3000/fetch-composer?url=${encodeURIComponent(url + '/composer.json')}`;
 
-            try {
-                const response = await fetch(composerUrl);
-                if (!response.ok) {
-                    throw new Error('Network response was not ok');
-                }
-                const data = await response.json();
-                document.getElementById('jsonData').textContent = JSON.stringify(data, null, 2);
-            } catch (error) {
-                document.getElementById('jsonData').textContent = `Error: ${error.message}`;
-            }
+            fetch(proxyUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('composer-details').style.display = 'block';
+                    document.getElementById('name').textContent = data.name;
+                    document.getElementById('description').textContent = data.description;
+                    document.getElementById('homepage').textContent = data.homepage;
+                })
+                .catch(error => {
+                    console.error('Error fetching composer.json:', error);
+                    alert('Failed to fetch composer.json. Please check the URL and try again.');
+                });
         }
     </script>
 </body>

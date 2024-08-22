@@ -5,27 +5,26 @@
     <title>Fetch composer.json</title>
 </head>
 <body>
-    <h1>Fetch composer.json File</h1>
-    <button onclick="fetchComposerJson()">Get composer.json</button>
-    <pre id="json-content"></pre>
+    <h2>Fetch composer.json File</h2>
+    <input type="text" id="urlInput" placeholder="Enter website URL">
+    <button onclick="fetchComposerJson()">Fetch</button>
+    <pre id="jsonData"></pre>
 
     <script>
         async function fetchComposerJson() {
-            const url = prompt("Please enter the website URL:");
-            if (!url) {
-                alert("URL is required!");
-                return;
-            }
+            const url = document.getElementById('urlInput').value;
+            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
+            const composerUrl = `${proxyUrl}${url}composer.json`;
 
             try {
-                const response = await fetch(`${url}composer.json`);
+                const response = await fetch(composerUrl);
                 if (!response.ok) {
-                    throw new Error("Network response was not ok");
+                    throw new Error('Network response was not ok');
                 }
                 const data = await response.json();
-                document.getElementById('json-content').textContent = JSON.stringify(data, null, 2);
+                document.getElementById('jsonData').textContent = JSON.stringify(data, null, 2);
             } catch (error) {
-                alert("Failed to fetch composer.json: " + error.message);
+                document.getElementById('jsonData').textContent = `Error: ${error.message}`;
             }
         }
     </script>

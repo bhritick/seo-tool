@@ -3,57 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PHP Framework Detector</title>
+    <title>Fetch composer.json Details</title>
 </head>
 <body>
-    <h1>PHP Framework Detector</h1>
-    <form id="frameworkForm">
-        <label for="url">Enter Website URL:</label>
-        <input type="url" id="url" name="url" required>
-        <button type="submit">Detect Framework</button>
-    </form>
-    <div id="result"></div>
+    <div>
+        <h2>Enter Website URL</h2>
+        <input type="text" id="url-input" placeholder="Enter website URL">
+        <button onclick="fetchComposerDetails()">Fetch Details</button>
+    </div>
+    <div id="composer-details" style="display: none;">
+        <h2>Composer Details</h2>
+        <p><strong>Name:</strong> <span id="name"></span></p>
+        <p><strong>Description:</strong> <span id="description"></span></p>
+        <p><strong>Homepage:</strong> <span id="homepage"></span></p>
+    </div>
 
     <script>
-        document.getElementById('frameworkForm').addEventListener('submit', async function(event) {
-            event.preventDefault();
-            const url = document.getElementById('url').value;
-            const resultDiv = document.getElementById('result');
-            resultDiv.innerHTML = 'Detecting...';
+        function fetchComposerDetails() {
+            const url = document.getElementById('url-input').value;
+            const composerUrl = `${url}/composer.json`;
 
-            try {
-                const response = await fetch(url);
-                const headers = response.headers;
-                const html = await response.text();
-
-                let framework = 'Unknown';
-
-                // Check for specific HTTP headers
-                if (headers.get('X-Powered-By')) {
-                    framework = headers.get('X-Powered-By');
-                }
-
-                // Check for specific cookies
-                const cookies = document.cookie;
-                if (cookies.includes('ci_session')) {
-                    framework = 'CodeIgniter';
-                } else if (cookies.includes('laravel_session')) {
-                    framework = 'Laravel';
-                }
-
-                // Check for specific HTML markers
-                if (html.includes('meta name="csrf-token"')) {
-                    framework = 'Laravel';
-                } else if (html.includes('<!-- CodeIgniter -->')) {
-                    framework = 'CodeIgniter';
-                }
-
-                resultDiv.innerHTML = `Detected PHP Framework: ${framework}`;
-            } catch (error) {
-                resultDiv.innerHTML = 'Error detecting PHP framework. Please check the URL and try again.';
-                console.error('Error detecting PHP framework:', error);
-            }
-        });
+            fetch(composerUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    document.getElementById('composer-details').style.display = 'block';
+                    document.getElementById('name').textContent = data.name;
+                    document.getElementById('description').textContent = data.description;
+                    document.getElementById('homepage').textContent = data.homepage;
+                })
+                .catch(error => {
+                    console.error('Error fetching composer.json:', error);
+                    alert('Failed to fetch composer.json. Please check the URL and try again.');
+                });
+        }
     </script>
 </body>
 </html>

@@ -13,7 +13,7 @@
     <script>
         async function fetchComposerJson() {
             const url = document.getElementById('urlInput').value;
-            const proxyUrl = 'http://103.78.201.242:5001';
+            const proxyUrl = 'https://api.codetabs.com/v1/proxy/?quest=';
             const composerUrl = `${proxyUrl}${url}composer.json`;
 
             try {

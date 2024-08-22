@@ -13,44 +13,52 @@
             padding: 10px;
             margin: 5px 0;
         }
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
     <h1>PHP Framework Detector</h1>
-    <form id="frameworkForm">
-        <label for="url">Enter Site URL:</label>
-        <input type="text" id="url" name="url" required>
-        <button type="submit">Detect Framework</button>
-    </form>
-    <p id="result"></p>
+    <input type="text" id="urlInput" placeholder="Enter website URL" />
+    <button onclick="detectFramework()">Detect Framework</button>
+    <div id="result"></div>
 
     <script>
-        function detectPHPFramework(url) {
-            const frameworks = {
-                'Laravel': ['/vendor/laravel/', '/storage/framework/', '/bootstrap/cache/'],
-                'Symfony': ['/app/cache/', '/app/logs/', '/vendor/symfony/'],
-                'CodeIgniter': ['/system/core/', '/application/config/', '/application/views/'],
-                'Yii': ['/assets/', '/protected/', '/framework/'],
-                'Zend': ['/library/Zend/', '/application/modules/', '/public/'],
-                'CakePHP': ['/lib/Cake/', '/app/Config/', '/app/tmp/']
-            };
+        async function getPHPFramework(url) {
+            try {
+                const response = await fetch(url);
+                const html = await response.text();
 
-            for (const [framework, patterns] of Object.entries(frameworks)) {
-                for (const pattern of patterns) {
-                    if (url.includes(pattern)) {
-                        return framework;
-                    }
+                // Check for common PHP framework indicators
+                if (html.includes('wp-content') || html.includes('wp-includes')) {
+                    return 'WordPress';
+                } else if (html.includes('index.php?route=')) {
+                    return 'OpenCart';
+                } else if (html.includes('mage-') || html.includes('Magento')) {
+                    return 'Magento';
+                } else if (html.includes('laravel') || html.includes('csrf-token')) {
+                    return 'Laravel';
+                } else if (html.includes('ci_session') || html.includes('CodeIgniter')) {
+                    return 'CodeIgniter';
+                } else {
+                    return 'Unknown PHP Framework';
                 }
+            } catch (error) {
+                console.error('Error fetching the URL:', error);
+                return 'Error fetching the URL';
             }
-            return 'Unknown Framework';
         }
 
-        document.getElementById('frameworkForm').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const url = document.getElementById('url').value;
-            const result = detectPHPFramework(url);
-            document.getElementById('result').textContent = `Detected Framework: ${result}`;
-        });
+        async function detectFramework() {
+            const url = document.getElementById('urlInput').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.textContent = 'Detecting...';
+
+            const framework = await getPHPFramework(url);
+            resultDiv.textContent = `PHP Framework: ${framework}`;
+        }
     </script>
 </body>
 </html>

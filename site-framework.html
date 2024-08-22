@@ -5,7 +5,7 @@
     <title>Fetch composer.json</title>
 </head>
 <body>
-    <h2>Fetch composer.json File</h2>
+    <h1>Fetch composer.json Data</h1>
     <input type="text" id="urlInput" placeholder="Enter website URL">
     <button onclick="fetchComposerJson()">Fetch</button>
     <pre id="jsonData"></pre>
@@ -13,8 +13,8 @@
     <script>
         async function fetchComposerJson() {
             const url = document.getElementById('urlInput').value;
-            const proxyUrl = 'YOUR_PROXY_SERVER';
-            const composerUrl = `${proxyUrl}${url}/composer.json`;
+            const proxyUrl = '103.78.201.242:5001';
+            const composerUrl = `${proxyUrl}${url}composer.json`;
 
             try {
                 const response = await fetch(composerUrl);

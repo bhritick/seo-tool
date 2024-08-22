@@ -4,61 +4,56 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PHP Framework Detector</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 20px;
-        }
-        input, button {
-            padding: 10px;
-            margin: 5px 0;
-        }
-        #result {
-            margin-top: 20px;
-            font-weight: bold;
-        }
-    </style>
 </head>
 <body>
     <h1>PHP Framework Detector</h1>
-    <input type="text" id="urlInput" placeholder="Enter website URL" />
-    <button onclick="detectFramework()">Detect Framework</button>
+    <form id="frameworkForm">
+        <label for="url">Enter Website URL:</label>
+        <input type="url" id="url" name="url" required>
+        <button type="submit">Detect Framework</button>
+    </form>
     <div id="result"></div>
 
     <script>
-        async function getPHPFramework(url) {
+        document.getElementById('frameworkForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const resultDiv = document.getElementById('result');
+            resultDiv.innerHTML = 'Detecting...';
+
             try {
                 const response = await fetch(url);
+                const headers = response.headers;
                 const html = await response.text();
 
-                // Check for common PHP framework indicators
-                if (html.includes('wp-content') || html.includes('wp-includes')) {
-                    return 'WordPress';
-                } else if (html.includes('index.php?route=')) {
-                    return 'OpenCart';
-                } else if (html.includes('mage-') || html.includes('Magento')) {
-                    return 'Magento';
-                } else if (html.includes('laravel') || html.includes('csrf-token')) {
-                    return 'Laravel';
-                } else if (html.includes('ci_session') || html.includes('CodeIgniter')) {
-                    return 'CodeIgniter';
-                } else {
-                    return 'Unknown PHP Framework';
+                let framework = 'Unknown';
+
+                // Check for specific HTTP headers
+                if (headers.get('X-Powered-By')) {
+                    framework = headers.get('X-Powered-By');
                 }
+
+                // Check for specific cookies
+                const cookies = document.cookie;
+                if (cookies.includes('ci_session')) {
+                    framework = 'CodeIgniter';
+                } else if (cookies.includes('laravel_session')) {
+                    framework = 'Laravel';
+                }
+
+                // Check for specific HTML markers
+                if (html.includes('meta name="csrf-token"')) {
+                    framework = 'Laravel';
+                } else if (html.includes('<!-- CodeIgniter -->')) {
+                    framework = 'CodeIgniter';
+                }
+
+                resultDiv.innerHTML = `Detected PHP Framework: ${framework}`;
             } catch (error) {
-                console.error('Error fetching the URL:', error);
-                return 'Error fetching the URL';
+                resultDiv.innerHTML = 'Error detecting PHP framework. Please check the URL and try again.';
+                console.error('Error detecting PHP framework:', error);
             }
-        }
-
-        async function detectFramework() {
-            const url = document.getElementById('urlInput').value;
-            const resultDiv = document.getElementById('result');
-            resultDiv.textContent = 'Detecting...';
-
-            const framework = await getPHPFramework(url);
-            resultDiv.textContent = `PHP Framework: ${framework}`;
-        }
+        });
     </script>
 </body>
 </html>

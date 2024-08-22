@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fetch composer.json Details</title>
+    <title>Fetch composer info</title>
 </head>
 <body>
     <div>
@@ -21,7 +21,7 @@
     <script>
         function fetchComposerDetails() {
             const url = document.getElementById('url-input').value;
-            const proxyUrl = `http://localhost:3000/fetch-composer?url=${encodeURIComponent(url + '/composer.json')}`;
+            const proxyUrl = `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(url + 'composer.json')}`;
 
             fetch(proxyUrl)
                 .then(response => {

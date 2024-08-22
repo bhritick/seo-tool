@@ -13,8 +13,8 @@
     <script>
         async function fetchComposerJson() {
             const url = document.getElementById('urlInput').value;
-            const proxyUrl = 'https://cors-anywhere.herokuapp.com/';
-            const composerUrl = `${proxyUrl}${url}composer.json`;
+            const proxyUrl = 'YOUR_PROXY_SERVER';
+            const composerUrl = `${proxyUrl}${url}/composer.json`;
 
             try {
                 const response = await fetch(composerUrl);

@@ -21,9 +21,9 @@
     <script>
         function fetchComposerDetails() {
             const url = document.getElementById('url-input').value;
-            const composerUrl = `${url}/composer.json`;
+            const proxyUrl = `http://localhost:3000/fetch-composer?url=${encodeURIComponent(url + '/composer.json')}`;
 
-            fetch(composerUrl)
+            fetch(proxyUrl)
                 .then(response => {
                     if (!response.ok) {
                         throw new Error('Network response was not ok');

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Framework Detector</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        input, button {
+            padding: 10px;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>PHP Framework Detector</h1>
+    <form id="frameworkForm">
+        <label for="url">Enter Site URL:</label>
+        <input type="text" id="url" name="url" required>
+        <button type="submit">Detect Framework</button>
+    </form>
+    <p id="result"></p>
+
+    <script>
+        function detectPHPFramework(url) {
+            const frameworks = {
+                'Laravel': ['/vendor/laravel/', '/storage/framework/', '/bootstrap/cache/'],
+                'Symfony': ['/app/cache/', '/app/logs/', '/vendor/symfony/'],
+                'CodeIgniter': ['/system/core/', '/application/config/', '/application/views/'],
+                'Yii': ['/assets/', '/protected/', '/framework/'],
+                'Zend': ['/library/Zend/', '/application/modules/', '/public/'],
+                'CakePHP': ['/lib/Cake/', '/app/Config/', '/app/tmp/']
+            };
+
+            for (const [framework, patterns] of Object.entries(frameworks)) {
+                for (const pattern of patterns) {
+                    if (url.includes(pattern)) {
+                        return framework;
+                    }
+                }
+            }
+            return 'Unknown Framework';
+        }
+
+        document.getElementById('frameworkForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const url = document.getElementById('url').value;
+            const result = detectPHPFramework(url);
+            document.getElementById('result').textContent = `Detected Framework: ${result}`;
+        });
+    </script>
+</body>
+</html>

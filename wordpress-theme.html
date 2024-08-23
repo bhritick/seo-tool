@@ -6,12 +6,12 @@
     <title>Stylesheet Detector</title>
 </head>
 <body>
-    <h1>Stylesheet URL Detector</h1>
+    <h1>Wordpress Stylesheet</h1>
     <form id="urlForm">
         <label for="websiteUrl">Enter Website URL:</label>
         <input type="url" id="websiteUrl" name="websiteUrl" required>
-        <label for="searchString">Enter Search String:</label>
-        <input type="text" id="searchString" name="searchString" required>
+<!--         <label for="searchString">Enter Search String:</label>
+        <input type="text" id="searchString" name="searchString" required> -->
         <button type="submit">Check Stylesheets</button>
     </form>
 
@@ -19,12 +19,13 @@
         document.getElementById('urlForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const websiteUrl = document.getElementById('websiteUrl').value;
-            const searchString = document.getElementById('searchString').value;
-            detectStylesheetWithString(websiteUrl, searchString);
+            const proxyUrl = `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(websiteUrl)}`;
+            const searchString = `proxyUrl + 'wp-content/'`;
+            detectStylesheetWithString(proxyUrl, searchString);
         });
 
-        function detectStylesheetWithString(websiteUrl, searchString) {
-            fetch(websiteUrl)
+        function detectStylesheetWithString(proxyUrl, searchString) {
+            fetch(proxyUrl)
                 .then(response => response.text())
                 .then(html => {
                     const parser = new DOMParser();

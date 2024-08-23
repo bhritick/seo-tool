@@ -19,7 +19,8 @@
         document.getElementById('urlForm').addEventListener('submit', function(event) {
             event.preventDefault();
             const websiteUrl = document.getElementById('websiteUrl').value;
-            const proxyUrl = `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(websiteUrl)}`;
+            const encodedUrl = ${encodeURIComponent(websiteUrl)};
+            const proxyUrl = `https://api.codetabs.com/v1/proxy/?quest=${encodeURIComponent(encodedUrl)}`;
             const searchString = `websiteUrl + 'wp-content/'`;
             detectStylesheetWithString(proxyUrl, searchString);
         });

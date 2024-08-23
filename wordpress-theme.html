@@ -3,36 +3,48 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>WordPress Theme Detector</title>
+    <title>Stylesheet Detector</title>
 </head>
 <body>
-    <h1>WordPress Theme Detector</h1>
-    <form id="themeForm">
-        <label for="url">Enter Website URL:</label>
-        <input type="text" id="url" name="url" required>
-        <button type="submit">Detect Theme</button>
+    <h1>Stylesheet URL Detector</h1>
+    <form id="urlForm">
+        <label for="websiteUrl">Enter Website URL:</label>
+        <input type="url" id="websiteUrl" name="websiteUrl" required>
+        <label for="searchString">Enter Search String:</label>
+        <input type="text" id="searchString" name="searchString" required>
+        <button type="submit">Check Stylesheets</button>
     </form>
-    <div id="result"></div>
 
     <script>
-        document.getElementById('themeForm').addEventListener('submit', function(event) {
+        document.getElementById('urlForm').addEventListener('submit', function(event) {
             event.preventDefault();
-            const url = document.getElementById('url').value;
-            detectTheme(url);
+            const websiteUrl = document.getElementById('websiteUrl').value;
+            const searchString = document.getElementById('searchString').value;
+            detectStylesheetWithString(websiteUrl, searchString);
         });
 
-        async function detectTheme(url) {
-            try {
-                const response = await fetch(`https://api.wpthemedetector.com/?url=${encodeURIComponent(url)}`);
-                const data = await response.json();
-                if (data.theme) {
-                    document.getElementById('result').innerHTML = `<p>Theme Name: ${data.theme.name}</p><p>Theme URL: <a href="${data.theme.url}" target="_blank">${data.theme.url}</a></p>`;
-                } else {
-                    document.getElementById('result').innerHTML = `<p>Could not detect the theme. Please check the URL and try again.</p>`;
-                }
-            } catch (error) {
-                document.getElementById('result').innerHTML = `<p>Error: ${error.message}</p>`;
-            }
+        function detectStylesheetWithString(websiteUrl, searchString) {
+            fetch(websiteUrl)
+                .then(response => response.text())
+                .then(html => {
+                    const parser = new DOMParser();
+                    const doc = parser.parseFromString(html, 'text/html');
+                    const links = doc.getElementsByTagName('link');
+                    let found = false;
+
+                    for (let i = 0; i < links.length; i++) {
+                        if (links[i].rel === 'stylesheet' && links[i].href.includes(searchString)) {
+                            console.log(`Stylesheet found: ${links[i].href}`);
+                            found = true;
+                            break;
+                        }
+                    }
+
+                    if (!found) {
+                        console.log('No matching stylesheet found.');
+                    }
+                })
+                .catch(error => console.error('Error fetching the website:', error));
         }
     </script>
 </body>

@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schema Tag Generator</title>
+</head>
+<body>
+    <h1>Schema Tag Generator for Articles</h1>
+    <form id="schemaForm">
+        <label for="title">Article Title:</label><br>
+        <input type="text" id="title" name="title"><br><br>
+
+        <label for="author">Author Name:</label><br>
+        <input type="text" id="author" name="author"><br><br>
+
+        <label for="datePublished">Date Published:</label><br>
+        <input type="date" id="datePublished" name="datePublished"><br><br>
+
+        <label for="url">Page URL:</label><br>
+        <input type="url" id="url" name="url"><br><br>
+
+        <input type="button" value="Generate Schema" onclick="generateSchema()">
+    </form>
+
+    <h2>Generated Schema Tag</h2>
+    <pre id="schemaOutput"></pre>
+
+    <script>
+        function generateSchema() {
+            var title = document.getElementById('title').value;
+            var author = document.getElementById('author').value;
+            var datePublished = document.getElementById('datePublished').value;
+            var url = document.getElementById('url').value;
+
+            var schema = {
+                "@context": "https://schema.org",
+                "@type": "Article",
+                "headline": title,
+                "author": {
+                    "@type": "Person",
+                    "name": author
+                },
+                "datePublished": datePublished,
+                "mainEntityOfPage": {
+                    "@type": "WebPage",
+                    "@id": url
+                }
+            };
+
+            document.getElementById('schemaOutput').textContent = JSON.stringify(schema, null, 2);
+        }
+    </script>
+</body>
+</html>

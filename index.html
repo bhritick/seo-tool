@@ -54,12 +54,12 @@
             background-repeat: no-repeat;
         }
 
-        section {
+        /* section {
             background-image: url(./res/img/animated-shape.svg);
             background-size: cover;
             background-position: center bottom;
             background-repeat: no-repeat;
-        }
+        } */
 
         #card-bg-1 {
             background-image: url(https://images.pexels.com/photos/3853501/pexels-photo-3853501.jpeg?auto=compress&cs=tinysrgb&w=600);
@@ -85,47 +85,40 @@
         a {
             text-decoration: none;
         }
+        .outlined-text {            
+            text-shadow: 
+                1px 1px 0 #000000, 
+                -1px -1px 0 #000000, 
+                1px -1px 0 #000000, 
+                -1px 1px 0 #000000;
+        }
+        .text-shadow {
+            text-shadow: 1px 1px 0px #333333;
+        }
     </style>
 </head>
 
 <body>
-    <header>
+    <header class="py-5">
         <div class="container">
             <div class="row">
-                <div class="col-12">
-                    <h1 class="text-center display-4 my-5 py-5">Free <span
-                            class="text-danger display-1 fw-bolder">SEO</span> Tools</h1>
+                <div class="col-md-6 col-12">
+                    <h1 class="text-shadow text-end my-4 pe-5">
+                        <span class="text-uppercase text-light d-block fw-bold display-1">Free </span>
+                        <span class="text-uppercase text-dark display-5 fw-bolder">SEO Tools</span>
+                    </h1>
+                </div>
+                <div class="col-md-6 col-12">
+                    <p class="lead border-white border-start border-5 pt-4 ps-5">Boost your website's performance with our free SEO tools. Analyze SEO metrics, generate meta tags, create XML sitemaps, and design favicons effortlessly. Perfect for optimizing search rankings and enhancing user experience.</p>
                 </div>
             </div>
         </div>
     </header>
-    <section class="py-5">
+    <section class="mb-5 py-5">
         <div class="container">
             <div class="row">
                 <div class="col-lg-3 col-md-6 col-12">
-                    <div class="card shadow my-3">
-                        <div class="card-body">
-                            <img class="px-5" alt="Free Sitemap Generator" src="./res/img/Google sitemap-amico.svg">
-                            <hr class="mx-auto w-50 my-4">
-                            <a href="sitemap" class="stretched-link">
-                                <h2 class="text-center h5">Sitemap Generator</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="card shadow my-3">
-                        <div class="card-body">
-                            <img class="px-5" alt="Free Sitemap Generator" src="./res/img/Data extraction-amico.svg">
-                            <hr class="mx-auto w-50 my-4">
-                            <a href="seo-anlyser" class="stretched-link">
-                                <h2 class="text-center h5">SEO Analyser</h2>
-                            </a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-md-6 col-12">
-                    <div class="card shadow my-3">
+                    <div class="card shadow border-0 my-3">
                         <div class="card-body">
                             <img src="./res/img/generateMetaTags-logo.png" class="rounded-circle img-fluid px-5"  alt="Meta Tag Generator - Anupam Mondal" title="Meta Tag Generator - Anupam Mondal">
                             <hr class="mx-auto w-50 my-4">
@@ -136,7 +129,29 @@
                     </div>
                 </div>
                 <div class="col-lg-3 col-md-6 col-12">
-                    <div class="card shadow my-3">
+                    <div class="card shadow border-0 my-3">
+                        <div class="card-body">
+                            <img class="px-5" alt="Free Sitemap Generator" src="./res/img/Google sitemap-amico.svg">
+                            <hr class="mx-auto w-50 my-4">
+                            <a href="sitemap" class="stretched-link">
+                                <h2 class="text-center h5">Sitemap Generator</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="card shadow border-0 my-3">
+                        <div class="card-body">
+                            <img class="px-5" alt="Free Sitemap Generator" src="./res/img/Data extraction-amico.svg">
+                            <hr class="mx-auto w-50 my-4">
+                            <a href="seo-anlyser" class="stretched-link">
+                                <h2 class="text-center h5">SEO Analyser</h2>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3 col-md-6 col-12">
+                    <div class="card shadow border-0 my-3">
                         <div class="card-body">
                             <img class="px-5" alt="Free Sitemap Generator" src="./res/img/Software engineer-amico.svg">
                             <hr class="mx-auto w-50 my-4">
